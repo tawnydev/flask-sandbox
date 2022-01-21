@@ -1,3 +1,4 @@
+import array
 import os
 
 from flask import Flask, render_template
@@ -23,15 +24,15 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # modele
     from .modele import db
     db.init_app(app)
 
-    from .controller import auth
+    # controller
+    from .controller import auth, blog
     app.register_blueprint(auth.bp)
-
-    @app.route('/')
-    def index():
-        return render_template('index.html')
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
 
     # a simple page that says hello
     @app.route('/hello')
