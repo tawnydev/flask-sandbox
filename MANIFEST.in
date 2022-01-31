@@ -1,0 +1,4 @@
+include instance/schema.sql
+graft flask-sandbox/static
+graft flask-sandbox/templates
+global-exclude *.pyc
